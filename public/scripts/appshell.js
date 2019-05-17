@@ -8,7 +8,7 @@
     //  var weekDatesR = document.getElementById('weekDates');
       //var homework = document.getElementById('homework');
 
-      db.collection('subkect').get()
+      db.collection('subject').get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           console.log(doc.id, " => ", doc.data())
