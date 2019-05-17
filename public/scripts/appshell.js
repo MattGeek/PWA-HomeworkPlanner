@@ -8,8 +8,7 @@
       var weekDatesR = document.getElementById('weekDates');
       var homework = document.getElementById('homework');
 
-      db.collection('homework').where("expiry", "==", Timestamp.fromDate(new Date("2019-05-20T00:00:00+0200")))
-      .get()
+      db.collection('homework').get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           console.log(doc.id, " => ", doc.data());
