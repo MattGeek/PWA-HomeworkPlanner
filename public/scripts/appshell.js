@@ -1,12 +1,15 @@
 (
   ()=>{
-    const auth = firebase.auth();
+    const app = firebase;
+    console.log('intialized firebase app');
+    const auth = app.auth();
 
-    firebase.firestore().enablePersistance().then(() => {
+    app.firestore().enablePersistence().then(() => {
       const db = app.firestore();
 
     //  var weekDatesR = document.getElementById('weekDates');
       //var homework = document.getElementById('homework');
+      console.log('connected to firestore');
 
       db.collection('subject').get()
       .then(querySnapshot => {
@@ -19,4 +22,4 @@
       })
     })
   }
-);
+)();
