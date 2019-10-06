@@ -8,26 +8,27 @@
 		<!--Set PWA manifest-->
 		<link rel="manifest" href="manifest.json">
 		<!--Let the browser know that the PWA is responsive-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- register service worker -->
+		<script type="text/javascript">
+			if ('serviceWorker' in navigator){
+				window.addEventListener('load', function() {
+					navigator.serviceWorker
+						.register('/service-worker.js')
+						.then(function() {
+						});
+				});
+			}
+		</script>
 		<!--Import Material Design Components Web CSS & JS-->
 		<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"/>
 		<script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-
-		<link rel="stylesheet" href="/styles/main.css">
+		<!--Import Firebase UI CSS & JS-->
+		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth.css" />
+		<script src="https://www.gstatic.com/firebasejs/ui/4.2.0/firebase-ui-auth__it.js"></script>
 		<!--Icons-->
     <link rel="shorcut icon" type="image/x-icon" href="/images/icons/icon-512x512.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!-- register service worker -->
-		<script type="text/javascript">
-		if ('serviceWorker' in navigator){
-			window.addEventListener('load', function() {
-				navigator.serviceWorker
-					.register('/service-worker.js')
-					.then(function() {
-					});
-			});
-		}
-		</script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-100868130-2"></script>
 		<script>
@@ -37,9 +38,16 @@
 
 		  gtag('config', 'UA-100868130-2');
 		</script>
+		<!-- My CSS -->
+		<link rel="stylesheet" href="/styles/main.css">
+		<script src="/__/firebase/7.0.0/firebase-app.js"></script>
+		<script src="/__/firebase/7.0.0/firebase-auth.js"></script>
+		<script src="/__/firebase/7.0.0/firebase-firestore.js"></script>
+		<script src="/__/firebase/init.js"></script>
+		<!--script type="text/javascript" src="/scripts/auth.js"></script-->
 	</head>
-	<body>
-		<header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+	<body class="mdc-typography">
+		<header id="app-bar" class="mdc-top-app-bar mdc-top-app-bar--fixed">
 			<div class="mdc-top-app-bar__row">
 				<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
 					<button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
@@ -50,73 +58,40 @@
     		</section>
 			</div>
 		</header>
+		<aside class="mdc-drawer mdc-drawer--modal">
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+            <span class="mdc-list-item__text">Inbox</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+            <span class="mdc-list-item__text">Outgoing</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+            <span class="mdc-list-item__text">Drafts</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+    <div class="mdc-drawer-scrim"></div>
+		<div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate mdc-top-app-bar--fixed-adjust">
+			<div class="mdc-linear-progress__buffering-dots"></div>
+			<div class="mdc-linear-progress__buffer"></div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+			<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+				<span class="mdc-linear-progress__bar-inner"></span>
+			</div>
+		</div>
 
-		<main>
-			<h3>Firebase Hosting is cool :D</h3>
-			<table class="mdc-table" id="homeworkTable">
-				<th id="weekDays">
-					<td>
-						Lunedì
-					</td>
-					<td>
-						Martedì
-					</td>
-					<td>
-						Mercoledì
-					</td>
-					<td>
-						Giovedì
-					</td>
-					<td>
-						Venerdì
-					</td>
-				</th>
-				<th id="weekDates">
-					<td>
+		<main class="mdc-top-app-bar--fixed-adjust">
 
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-				</th>
-				<tr id="homework">
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-					<td>
-
-					</td>
-				</tr>
-				<tr id="notes">
-					<td>
-
-					</td>
-				</tr>
-			</table>
 		</main>
 
-		<script src="/__/firebase/7.0.0/firebase-app.js"></script>
-		<script src="/__/firebase/7.0.0/firebase-auth.js"></script>
-		<script src="/__/firebase/7.0.0/firebase-firestore.js"></script>
-		<script src="/__/firebase/init.js"></script>
 		<script src="/scripts/appshell.js"></script>
 	</body>
 </html>
